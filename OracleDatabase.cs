@@ -8,11 +8,14 @@ namespace oracle4net
     {
         private OracleConnection con;
         private OracleConnectionStringBuilder str;
+        private OracleCommand cmd;
+        private OracleDataReader rdr;
 
         public OracleDatabase()
         {
             this.con = new OracleConnection();
             this.str = new OracleConnectionStringBuilder();
+            this.cmd = new OracleCommand();
             Console.WriteLine("OracleDatabase created");
         }
 
@@ -28,6 +31,7 @@ namespace oracle4net
             str.DataSource = DataSource;
             con.ConnectionString = str.ToString();
             con.Open();
+            cmd.Connection = con;
             Console.WriteLine($"Connected to Oracle Database {con.ServerVersion}");
             Console.WriteLine($"Connected as {con.GetSchema()}@{con.DatabaseName}");
         }
@@ -40,6 +44,18 @@ namespace oracle4net
             con.Close();
             con.Dispose();
             Console.WriteLine($"Disconnected from Oracle Database {serverVersion}");
+        }
+
+        public int SQLCount(string table, string whereClause)
+        {
+            int count = 0;
+            cmd.CommandText = "SELECT COUNT(*) FROM " + table + " WHERE " + whereClause;
+            rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                count = rdr.GetInt32(0);
+            }
+            return count;
         }
     }
 }
