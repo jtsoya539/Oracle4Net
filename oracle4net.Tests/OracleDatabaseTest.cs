@@ -6,18 +6,29 @@ namespace oracle4net.Tests
 {
     public class OracleDatabaseTest
     {
+        // Arrange
+        // Act
+        // Assert
+
         OracleDatabase db;
 
         public OracleDatabaseTest()
         {
             db = new OracleDatabase();
-            //db.Connect();
+            db.Connect("ne", "ruffus", "rama2");
         }
 
         [Fact]
-        public void Test1()
+        public void ExecuteSQLCountWithCorrectArguments()
         {
-            Assert.Equal(14, db.ExecuteSQLCount("emp", "columna = 2"));
+            Assert.Equal(15, db.ExecuteSQLCount("t_clubes", "1=1"));
         }
+
+        [Fact]
+        public void ExecuteStoredFunctionVarchar2WithCorrectArgument()
+        {
+            Assert.Equal("CLUB CERRO PORTEÑO", db.ExecuteStoredFunctionVarchar2("f_nombre_club('CER')"));
+        }
+
     }
 }

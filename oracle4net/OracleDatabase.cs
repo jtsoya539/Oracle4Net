@@ -30,10 +30,17 @@ namespace oracle4net
             str.Password = Password;
             str.DataSource = DataSource;
             con.ConnectionString = str.ToString();
-            con.Open();
-            cmd.Connection = con;
-            Console.WriteLine($"Connected to Oracle Database {con.ServerVersion}");
-            Console.WriteLine($"Connected as {con.GetSchema()}@{con.DatabaseName}");
+            try
+            {
+                con.Open();
+                cmd.Connection = con;
+                Console.WriteLine($"Connected to Oracle Database {con.ServerVersion}");
+                Console.WriteLine($"Connected as {con.GetSchema()}@{con.DatabaseName}");
+            }
+            catch (OracleException oex)
+            {
+                Console.WriteLine(oex.Message);
+            }
         }
 
         public bool IsConnected() => con.State == ConnectionState.Open;
@@ -63,6 +70,25 @@ namespace oracle4net
                 Console.WriteLine(oex.Message);
             }
             return count;
+        }
+
+        public string ExecuteStoredFunctionVarchar2(string statement)
+        {
+            if (!this.IsConnected())
+            {
+                throw new Exception("No connection to Oracle Database");
+            }
+            cmd.CommandText = "BEGIN :1 := " + statement + "; END;";
+            OracleParameter result = cmd.Parameters.Add("result", OracleDbType.Varchar2, 200, null, ParameterDirection.Output);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (OracleException oex)
+            {
+                Console.WriteLine(oex.Message);
+            }
+            return result.Value.ToString();
         }
     }
 }
