@@ -4,7 +4,7 @@ using Oracle.ManagedDataAccess.Client;
 
 namespace oracle4net
 {
-    class OracleDatabase
+    public class OracleDatabase
     {
         private OracleConnection con;
         private OracleConnectionStringBuilder str;
@@ -46,14 +46,21 @@ namespace oracle4net
             Console.WriteLine($"Disconnected from Oracle Database {serverVersion}");
         }
 
-        public int SQLCount(string table, string whereClause)
+        public int ExecuteSQLCount(string table, string whereClause)
         {
+            if (!this.IsConnected())
+            {
+                throw new Exception("No connection to Oracle Database");
+            }
             int count = 0;
             cmd.CommandText = "SELECT COUNT(*) FROM " + table + " WHERE " + whereClause;
-            rdr = cmd.ExecuteReader();
-            while (rdr.Read())
+            try
             {
-                count = rdr.GetInt32(0);
+                count = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (OracleException oex)
+            {
+                Console.WriteLine(oex.Message);
             }
             return count;
         }
