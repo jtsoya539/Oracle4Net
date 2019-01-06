@@ -1,6 +1,6 @@
 using System;
 
-namespace oracle4net
+namespace Oracle4Net
 {
 
     public class ConnectionParams
