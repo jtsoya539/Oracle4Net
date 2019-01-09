@@ -29,9 +29,21 @@ namespace Oracle4Net
             logger.Information("Oracle Database created");
         }
 
-        public void Connect()
+        public void Connect(string ConnectionString)
         {
-            Connect(ConnectionParams.UserID, ConnectionParams.Password, ConnectionParams.DataSource);
+            str.ConnectionString = ConnectionString;
+            con.ConnectionString = str.ToString();
+            try
+            {
+                con.Open();
+                cmd.Connection = con;
+                logger.Information($"Connected to Oracle Database {con.ServerVersion}");
+                logger.Information($"Connected as {str.UserID}@{con.DatabaseName}");
+            }
+            catch (OracleException oex)
+            {
+                throw new OracleDatabaseException(oex.Message, oex.Number);
+            }
         }
 
         public void Connect(string UserID, string Password, string DataSource)
