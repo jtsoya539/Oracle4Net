@@ -8,11 +8,6 @@ namespace Oracle4Net
 {
     public class OracleDatabase : IOracleDatabase
     {
-        // TODO ExecuteStoredFunctionVarchar2 --> retorna string
-        // TODO ExecuteStoredFunctionClob     --> retorna string
-        // TODO ExecuteStoredFunctionNumber   --> retorna decimal o int
-        // TODO ExecuteStoredProcedure        --> retorna void
-        // TODO ExecutePLSQLBlock             --> retorna void
 
         private OracleConnection con;
         private OracleConnectionStringBuilder str;
