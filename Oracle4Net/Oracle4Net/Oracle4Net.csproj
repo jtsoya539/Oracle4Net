@@ -2,11 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Oracle4Net</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>jtsoya539</Authors>
+    <Company>RamaPy</Company>
+    <Title>Oracle4Net</Title>
+    <PackageDescription>Simple Oracle Database connector for Microsoft .NET Core</PackageDescription>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/jtsoya539/Oracle4Net</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.18.3" />
-    <PackageReference Include="Serilog" Version="2.7.1" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.18.5" />
+    <PackageReference Include="Serilog" Version="2.8.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
   </ItemGroup>
 

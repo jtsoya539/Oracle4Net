@@ -6,7 +6,7 @@ using Serilog;
 
 namespace Oracle4Net
 {
-    public class OracleDatabase
+    public class OracleDatabase : IOracleDatabase
     {
         // TODO ExecuteStoredFunctionVarchar2 --> retorna string
         // TODO ExecuteStoredFunctionClob     --> retorna string
@@ -221,50 +221,6 @@ namespace Oracle4Net
                 logger.Information($"{count} row(s) selected");
             }
             ClearCommand();
-        }
-
-        public string ExecuteStoredFunctionVarchar2(string statement)
-        {
-            if (!this.IsConnected())
-            {
-                throw new OracleDatabaseException("No connection to Oracle Database", -20000);
-            }
-            cmd.CommandText = "BEGIN :1 := " + statement + "; END;";
-            OracleParameter result = cmd.Parameters.Add("result", OracleDbType.Varchar2, 4000, null, ParameterDirection.Output);
-            // * OracleDbTypeEx specifies the Oracle data type to bind the parameter as, but returns a .NET type as output
-            result.OracleDbTypeEx = OracleDbType.Varchar2;
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (OracleException oex)
-            {
-                throw new OracleDatabaseException(oex.Message, oex.Number);
-            }
-            ClearCommand();
-            return (string)result.Value;
-        }
-
-        public decimal ExecuteStoredFunctionNumber(string statement)
-        {
-            if (!this.IsConnected())
-            {
-                throw new OracleDatabaseException("No connection to Oracle Database", -20000);
-            }
-            cmd.CommandText = "BEGIN :1 := " + statement + "; END;";
-            OracleParameter result = cmd.Parameters.Add("result", OracleDbType.Decimal, /*null, null,*/ ParameterDirection.Output);
-            // * OracleDbTypeEx specifies the Oracle data type to bind the parameter as, but returns a .NET type as output
-            result.OracleDbTypeEx = OracleDbType.Decimal;
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (OracleException oex)
-            {
-                throw new OracleDatabaseException(oex.Message, oex.Number);
-            }
-            ClearCommand();
-            return (decimal)result.Value;
         }
 
         public T ExecuteStoredFunction<T>(string statement) // where T : System.Decimal
