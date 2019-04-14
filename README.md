@@ -19,7 +19,7 @@ class Program
 		try
 		{
 			db.Connect("hr", "password", dataSource);
-			db.ExecuteSQLCount("employees", "department_id = 50");
+			System.Console.WriteLine(db.ExecuteSQLCount("employees", "department_id = 50"));
 			db.Disconnect();
 		}
 		catch (OracleDatabaseException)
