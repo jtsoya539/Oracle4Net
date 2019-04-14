@@ -9,6 +9,9 @@ Simple Oracle Database connector for Microsoft .NET Core based on official [Orac
 
 ## Example
 ```csharp
+using System;
+using Oracle4Net;
+
 class Program
 {
 	static void Main(string[] args)
@@ -21,12 +24,12 @@ class Program
 			db.Connect("hr", "password", dataSource);
 			System.Console.WriteLine(db.ExecuteSQLCount("employees", "department_id = 50"));
 			db.Disconnect();
+			System.Console.WriteLine(db.IsConnected());
 		}
 		catch (OracleDatabaseException)
 		{
 			System.Console.WriteLine("Oracle Exception");
 		}
-        System.Console.WriteLine(db.IsConnected());
 	}
 }
 ```
