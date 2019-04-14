@@ -86,7 +86,9 @@ namespace Oracle4Net
             cmd.CommandText = "SELECT COUNT(*) FROM " + table + " WHERE " + whereClause;
             try
             {
+                logger.Information($"Executing SQL Count: {cmd.CommandText}");
                 count = Convert.ToInt32(cmd.ExecuteScalar());
+                logger.Information($"Result: {Convert.ToString(count)}");
             }
             catch (OracleException oex)
             {
@@ -251,7 +253,9 @@ namespace Oracle4Net
 
             try
             {
+                logger.Information($"Executing Stored Function: {cmd.CommandText}");
                 cmd.ExecuteNonQuery();
+                logger.Information($"Result: {Convert.ToString((T)result.Value)}");
             }
             catch (OracleException oex)
             {
@@ -270,6 +274,7 @@ namespace Oracle4Net
             cmd.CommandText = "BEGIN " + statement + "; END;";
             try
             {
+                logger.Information($"Executing Stored Procedure: {cmd.CommandText}");
                 cmd.ExecuteNonQuery();
             }
             catch (OracleException oex)
@@ -288,6 +293,7 @@ namespace Oracle4Net
             cmd.CommandText = block;
             try
             {
+                logger.Information($"Executing PL/SQL Block: {cmd.CommandText}");
                 cmd.ExecuteNonQuery();
             }
             catch (OracleException oex)
