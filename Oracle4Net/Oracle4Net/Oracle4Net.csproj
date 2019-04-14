@@ -10,6 +10,7 @@
     <PackageDescription>Simple Oracle Database connector for Microsoft .NET Core based on official Oracle Data Provider for .NET (ODP.NET) Core.</PackageDescription>
     <Description>Simple Oracle Database connector for Microsoft .NET Core based on official Oracle Data Provider for .NET (ODP.NET) Core.</Description>
     <PackageIconUrl>http://www.rama.com.py/images/icon.png</PackageIconUrl>
+    <PackageReleaseNotes>For release notes see https://github.com/jtsoya539/Oracle4Net/blob/master/releasenotes.md</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/jtsoya539/Oracle4Net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
