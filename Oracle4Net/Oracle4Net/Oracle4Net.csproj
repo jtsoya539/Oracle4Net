@@ -3,13 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Oracle4Net</PackageId>
-    <Version>0.1.2</Version>
+    <Version>0.1.3</Version>
     <Authors>jtsoya539</Authors>
     <Company>RamaPy</Company>
     <Title>Oracle4Net</Title>
     <PackageDescription>Simple Oracle Database connector for Microsoft .NET Core based on official Oracle Data Provider for .NET (ODP.NET) Core.</PackageDescription>
     <Description>Simple Oracle Database connector for Microsoft .NET Core based on official Oracle Data Provider for .NET (ODP.NET) Core.</Description>
-    <PackageIconUrl>http://www.rama.com.py/images/icon.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/jtsoya539/Oracle4Net/master/RamaPy.png</PackageIconUrl>
     <PackageReleaseNotes>For release notes see https://github.com/jtsoya539/Oracle4Net/blob/master/releasenotes.md</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/jtsoya539/Oracle4Net</RepositoryUrl>
